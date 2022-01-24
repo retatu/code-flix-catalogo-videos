@@ -4,19 +4,19 @@ import java.util.UUID;
 
 import com.codeflix.CFCatalogo.domain.entity.BaseEntity;
 
-public class Genra extends BaseEntity{
+public class Genre extends BaseEntity{
 
 	private String name;
 
-	public Genra(){}
-	public Genra(UUID id){
+	public Genre(){}
+	public Genre(UUID id){
 		this.setId(id);
 	}
-	public Genra(String name){
+	public Genre(String name){
 		this.name = name;
 		super.generateUUID();
 	}
-	public Genra(UUID id, String name){
+	public Genre(UUID id, String name){
 		super.setId(id);
 		this.name = name;
 	}
