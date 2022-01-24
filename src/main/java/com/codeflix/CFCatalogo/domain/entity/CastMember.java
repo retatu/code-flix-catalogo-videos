@@ -31,6 +31,7 @@ enum CastMemberType {
 		CastMemberType CastMemberType = (CastMemberType) values.get(type);
 		if (CastMemberType == null)
 			return false;
+		return true;
 	}
 }
 
@@ -63,13 +64,13 @@ public class CastMember extends BaseEntity {
 	}
 
 	public CastMemberType getCastMemberType() {
-		return castMemberType;
+		return type;
 	}
 
 	public void setCastMemberType(CastMemberType castMemberType) {
 		if (name == null || !CastMemberType.valueOf(type))
 			throw new IllegalArgumentException("");
-		this.castMemberType = castMemberType;
+		this.type = castMemberType;
 	}
 
 }
