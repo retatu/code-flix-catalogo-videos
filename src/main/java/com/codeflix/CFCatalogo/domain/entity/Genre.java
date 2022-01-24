@@ -1,5 +1,6 @@
 package com.codeflix.CFCatalogo.domain.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -8,7 +9,7 @@ import com.codeflix.CFCatalogo.domain.entity.BaseEntity;
 public class Genre extends BaseEntity {
 
 	private String name;
-	private List<Category> categories;
+	private List<Category> categories = new ArrayList<>();
 
 	public Genre() {
 	}
@@ -38,8 +39,8 @@ public class Genre extends BaseEntity {
 	}
 
 	public void setName(String name) {
-		if (name == null || name.isEmpty())
-			throw new IllegalArgumentException("");
+		if (name == null) throw new IllegalArgumentException("name is marked as non-null but got null");
+		if (name.isEmpty()) throw new IllegalArgumentException("name is marked as non-blank but got blank");
 		this.name = name;
 	}
 
@@ -53,18 +54,18 @@ public class Genre extends BaseEntity {
 
 	public void setCategories(List<Category> categories) {
 		if (categories == null)
-			throw new IllegalArgumentException("");
+			throw new IllegalArgumentException("category is marked as non-null but got null");
 		this.categories = categories;
 	}
 
 	public void addCategory(Category category){
 		if (category == null)
-			throw new IllegalArgumentException("");
+			throw new IllegalArgumentException("category is marked as non-null but got null");
 		this.categories.add(category);
 	}
 	public void removeCategory(Category category){
 		if (category == null)
-			throw new IllegalArgumentException("");
+			throw new IllegalArgumentException("category is marked as non-null but got null");
 		this.categories.removeIf(c -> this.categories.contains(category));
 	}
 }

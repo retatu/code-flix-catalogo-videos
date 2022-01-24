@@ -29,7 +29,8 @@ public class Category extends BaseEntity{
 	}
 
 	public void setName(String name) throws IllegalArgumentException {
-    if(name == null || name.isEmpty()) throw new IllegalArgumentException("");
+    if(name == null) throw new IllegalArgumentException("name is marked as non-null but got null");
+    if(name.isEmpty()) throw new IllegalArgumentException("name is marked as non-blank but got blank");
     this.name = name;
   }
 }
