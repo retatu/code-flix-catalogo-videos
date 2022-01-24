@@ -2,20 +2,34 @@ package com.codeflix.CFCatalogo.domain.entity;
 
 import java.util.UUID;
 
-public class Category{
-  private UUID uuid;
-  private String name;
+import com.codeflix.CFCatalogo.domain.entity.BaseEntity;
 
-  public Category() {}
-  public Category(String name) {}
-  public Category(UUID uuid, String name) {}
+public class Category extends BaseEntity{
+	private String name;
 
-  public String getName() {
-    return name;
-  }
+	public Category() {
+	}
 
-  public void setName(String name) throws IllegalArgumentException {
-    if(name == null || name.isEmpty()) throw new IllegalArgumentException("")
+	public Category(UUID id) {
+		super.setId(id);
+	}
+
+	public Category(String name) {
+		super.generateUUID();
+		this.setName(name);
+	}
+	
+	public Category(UUID id, String name) {
+		super.setId(id);;
+		this.setName(name);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) throws IllegalArgumentException {
+    if(name == null || name.isEmpty()) throw new IllegalArgumentException("");
     this.name = name;
   }
 }
