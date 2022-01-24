@@ -18,7 +18,7 @@ public class BaseEntity {
 
 	protected UUID generateUUID() {
 		this.id = UUID.randomUUID();
-		return this.id
+		return this.id;
 	}
 
 	protected Boolean isValidUUID(String id){

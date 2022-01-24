@@ -20,7 +20,7 @@ public class Category extends BaseEntity{
 	}
 	
 	public Category(UUID id, String name) {
-		super.setId(id);;
+		super.setId(id);
 		this.setName(name);
 	}
 
