@@ -54,7 +54,7 @@ public class Genre extends BaseEntity {
 
 	public void setCategories(List<Category> categories) {
 		if (categories == null)
-			throw new IllegalArgumentException("category is marked as non-null but got null");
+			throw new IllegalArgumentException("categories is marked as non-null but got null");
 		this.categories = categories;
 	}
 
