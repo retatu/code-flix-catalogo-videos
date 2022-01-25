@@ -10,6 +10,7 @@ import com.codeflix.CFCatalogo.domain.entity.BaseEntity;
 import com.codeflix.CFCatalogo.domain.entity.Category;
 import com.codeflix.CFCatalogo.domain.entity.Genre;
 import com.codeflix.CFCatalogo.domain.entity.CastMember;
+import com.codeflix.CFCatalogo.domain.entity.VideoFile;
 
 public class Video extends BaseEntity {
 
@@ -22,6 +23,7 @@ public class Video extends BaseEntity {
 	private List<Category> categories = new ArrayList<>();
 	private List<Genre> genres = new ArrayList<>();
 	private List<CastMember> castMembers = new ArrayList<>();
+	private List<VideoFile> videoFiles = new ArrayList<>();
 
 	public Video() {
 	}
@@ -59,6 +61,15 @@ public class Video extends BaseEntity {
 		this.setDescription(description);
 		this.setYearLaunched(yearLaunched);
 		this.setDuration(duration);
+	}
+
+	public Video(String title, String description, Integer yearLaunched, Float duration, List<VideoFile> videoFiles) {
+		super.generateUUID();
+		this.setTitle(title);
+		this.setDescription(description);
+		this.setYearLaunched(yearLaunched);
+		this.setDuration(duration);
+		this.setVideoFiles(videoFiles);
 	}
 
 	public String getTitle() {
@@ -147,35 +158,88 @@ public class Video extends BaseEntity {
 		return castMembers;
 	}
 
-	public void addCategory(Category category){
+	public void setVideoFiles(List<VideoFile> videoFiles) {
+		if (videoFiles == null)
+			throw new IllegalArgumentException("videoFiles is marked as non-null but got null");
+		this.videoFiles = videoFiles;
+	}
+
+	public List<VideoFile> getVideoFiles() {
+		return videoFiles;
+	}
+
+	public void addCategory(Category category) {
 		if (category == null)
 			throw new IllegalArgumentException("category is marked as non-null but got null");
 		this.categories.add(category);
 	}
-	public void addGenre(Genre genre){
+
+	public void addGenre(Genre genre) {
 		if (genre == null)
 			throw new IllegalArgumentException("genre is marked as non-null but got null");
 		this.genres.add(genre);
 	}
-	public void addCastMember(CastMember castMember){
+
+	public void addCastMember(CastMember castMember) {
 		if (castMember == null)
 			throw new IllegalArgumentException("castMember is marked as non-null but got null");
 		this.castMembers.add(castMember);
 	}
 
-	public void removeCategory(Category category){
+	public void addVideoFile(VideoFile videoFile) {
+		if (videoFile == null)
+			throw new IllegalArgumentException("videoFile is marked as non-null but got null");
+		this.videoFiles.add(videoFile);
+	}
+
+	public void removeCategory(Category category) {
 		if (category == null)
 			throw new IllegalArgumentException("category is marked as non-null but got null");
 		this.categories.removeIf(c -> this.categories.contains(category));
 	}
-	public void removeGenre(Genre genre){
+
+	public void removeGenre(Genre genre) {
 		if (genre == null)
 			throw new IllegalArgumentException("genre is marked as non-null but got null");
 		this.genres.removeIf(c -> this.genres.contains(genre));
 	}
-	public void removeCastMember(CastMember castMember){
+
+	public void removeCastMember(CastMember castMember) {
 		if (castMember == null)
 			throw new IllegalArgumentException("castMember is marked as non-null but got null");
 		this.castMembers.removeIf(c -> this.castMembers.contains(castMember));
+	}
+
+	public void removeVideoFile(VideoFile videoFile) {
+		if (videoFile == null)
+			throw new IllegalArgumentException("videoFile is marked as non-null but got null");
+		this.videoFiles.removeIf(c -> this.videoFiles.contains(videoFile));
+	}
+
+	public Video createVideoWithFile(String title, String description, Integer yearLaunched, Float duration,
+			List<Category> categories, List<Genre> genres, List<CastMember> castMembers, List<VideoFile> videoFiles) {
+		this.setTitle(title);
+		this.setDescription(description);
+		this.setYearLaunched(yearLaunched);
+		this.setDuration(duration);
+		this.setCategories(categories);
+		this.setGenres(genres);
+		this.setCastMembers(castMembers);
+		this.setVideoFiles(videoFiles);
+
+		return this;
+	}
+
+	public Video createVideoWithoutFile(String title, String description, Integer yearLaunched, Float duration,
+			List<Category> categories, List<Genre> genres, List<CastMember> castMembers) {
+		this.setTitle(title);
+		this.setDescription(description);
+		this.setYearLaunched(yearLaunched);
+		this.setDuration(duration);
+		this.setCategories(categories);
+		this.setGenres(genres);
+		this.setCastMembers(castMembers);
+
+		return this;
 	}
 }
