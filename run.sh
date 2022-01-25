@@ -1,3 +1,3 @@
 gradle --stop
 gradle build --continuous --quiet &
-gradle bootRun -Pdebug
+gradle bootRun -Pdebug --stacktrace

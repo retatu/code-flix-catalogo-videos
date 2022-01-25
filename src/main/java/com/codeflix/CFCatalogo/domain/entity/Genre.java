@@ -19,23 +19,23 @@ public class Genre extends BaseEntity {
 	}
 
 	public Genre(String name) {
-		this.name = name;
+		this.setName(name);
 		super.generateUUID();
 	}
 	public Genre(UUID id, String name) {
 		super.setId(id);
-		this.name = name;
+		this.setName(name);
 	}
 	public Genre(String name, List<Category> categories) {
-		this.name = name;
+		this.setName(name);
 		super.generateUUID();
-		this.categories = categories;
+		this.setCategories(categories);
 	}
 
 	public Genre(UUID id, String name, List<Category> categories) {
 		super.setId(id);
-		this.name = name;
-		this.categories = categories;
+		this.setName(name);
+		this.setCategories(categories);
 	}
 
 	public void setName(String name) {
@@ -66,6 +66,6 @@ public class Genre extends BaseEntity {
 	public void removeCategory(Category category){
 		if (category == null)
 			throw new IllegalArgumentException("category is marked as non-null but got null");
-		this.categories.removeIf(c -> this.categories.contains(category));
+		this.categories.removeIf(c -> c.equals(category));
 	}
 }
