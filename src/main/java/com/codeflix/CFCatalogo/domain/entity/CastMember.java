@@ -11,7 +11,7 @@ enum CastMemberType {
 	TYPE2(2);
 
 	private Integer type;
-	private final static Map values = new HashMap<>();
+	private final static Map<Integer, CastMemberType> values = new HashMap<>();
 
 	private CastMemberType(Integer type) {
 		this.type = type;
@@ -28,7 +28,7 @@ enum CastMemberType {
 	}
 
 	public static Boolean valueOf(CastMemberType type) {
-		CastMemberType CastMemberType = (CastMemberType) values.get(type);
+		CastMemberType CastMemberType = (CastMemberType) values.get(type.type);
 		if (CastMemberType == null)
 			return false;
 		return true;
@@ -44,13 +44,17 @@ public class CastMember extends BaseEntity {
 
 	public CastMember(UUID id, String name, CastMemberType type) {
 		super.setId(id);
-		this.name = name;
-		this.type = type;
+		this.setName(name);
+		this.setType(type);
 	}
 	public CastMember(String name, CastMemberType type) {
 		super.generateUUID();
-		this.name = name;
-		this.type = type;
+		this.setName(name);
+		this.setType(type);
+	}
+	public CastMember(String name) {
+		super.generateUUID();
+		this.setName(name);
 	}
 
 	public String getName() {
@@ -63,11 +67,11 @@ public class CastMember extends BaseEntity {
 		this.name = name;
 	}
 
-	public CastMemberType getCastMemberType() {
+	public CastMemberType getType() {
 		return type;
 	}
 
-	public void setCastMemberType(CastMemberType type) {
+	public void setType(CastMemberType type) {
 		if (type == null) throw new IllegalArgumentException("type is marked as non-null but got null");
 		if (!CastMemberType.valueOf(type)) throw new IllegalArgumentException("type is marked as valid-enum but is not a valid enum");
 		this.type = type;
