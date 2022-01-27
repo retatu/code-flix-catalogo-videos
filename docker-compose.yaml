@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  demo:
+  cf_catalogo:
     build: 
       context: ./
       dockerfile: Dockerfile
@@ -12,3 +12,22 @@ services:
     ports:
       - 8080:8080
       - 8005:8005
+    networks:
+      - cf_network
+  
+  cf_mysqldb:
+    image: mysql:latest
+    environment: 
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=cf_catalogo_dev
+      # - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+    security_opt:
+      - seccomp:unconfined
+    ports: 
+      - 3307:3306
+    networks:
+      - cf_network
+  
+networks:
+  cf_network: 
