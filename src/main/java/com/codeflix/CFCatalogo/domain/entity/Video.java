@@ -44,7 +44,7 @@ public class Video extends BaseEntity {
 		this.setOpened(opened);
 	}
 
-	public Video(String title, String description, Integer yearLaunched, Boolean openend, String rating,
+	public Video(String title, String description, Integer yearLaunched, Boolean opened, String rating,
 			Float duration) {
 		super.generateUUID();
 		this.setTitle(title);
@@ -72,6 +72,18 @@ public class Video extends BaseEntity {
 		this.setVideoFiles(videoFiles);
 	}
 
+	public Video(String title, String description, Integer yearLaunched, Float duration, List<Category> categories,
+			List<Genre> genres, List<CastMember> castMembers) {
+		super.generateUUID();
+		this.setTitle(title);
+		this.setDescription(description);
+		this.setYearLaunched(yearLaunched);
+		this.setDuration(duration);
+		this.setCategories(categories);
+		this.setGenres(genres);
+		this.setCastMembers(castMembers);
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -97,13 +109,18 @@ public class Video extends BaseEntity {
 	}
 
 	public void setYearLaunched(Integer yearLaunched) {
+		if (yearLaunched == null)
+			throw new IllegalArgumentException("yearLaunched is marked as non-null but got null");
+		if (yearLaunched <= 0) {
+			throw new IllegalArgumentException("yearLaunched is marked as bigger than 0 but is not");
+		}
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 		if (yearLaunched > currentYear)
 			throw new IllegalArgumentException("yearLauncher is greater than currentYear");
 		this.yearLaunched = yearLaunched;
 	}
 
-	public Boolean getOpened() {
+	public Boolean isOpened() {
 		return opened;
 	}
 
@@ -195,25 +212,25 @@ public class Video extends BaseEntity {
 	public void removeCategory(Category category) {
 		if (category == null)
 			throw new IllegalArgumentException("category is marked as non-null but got null");
-		this.categories.removeIf(c -> this.categories.contains(category));
+		this.categories.removeIf(c -> c.equals(category));
 	}
 
 	public void removeGenre(Genre genre) {
 		if (genre == null)
 			throw new IllegalArgumentException("genre is marked as non-null but got null");
-		this.genres.removeIf(c -> this.genres.contains(genre));
+		this.genres.removeIf(c -> c.equals(genre));
 	}
 
 	public void removeCastMember(CastMember castMember) {
 		if (castMember == null)
 			throw new IllegalArgumentException("castMember is marked as non-null but got null");
-		this.castMembers.removeIf(c -> this.castMembers.contains(castMember));
+		this.castMembers.removeIf(c -> c.equals(castMember));
 	}
 
 	public void removeVideoFile(VideoFile videoFile) {
 		if (videoFile == null)
 			throw new IllegalArgumentException("videoFile is marked as non-null but got null");
-		this.videoFiles.removeIf(c -> this.videoFiles.contains(videoFile));
+		this.videoFiles.removeIf(c -> c.equals(videoFile));
 	}
 
 	public Video createVideoWithFile(String title, String description, Integer yearLaunched, Float duration,
