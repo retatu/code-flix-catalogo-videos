@@ -2,9 +2,19 @@ package com.codeflix.CFCatalogo.domain.entity;
 
 import java.util.UUID;
 
-import com.codeflix.CFCatalogo.domain.entity.BaseEntity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+import lombok.EqualsAndHashCode;
+
+
+@Entity
+@Table(name = "categories")
+@EqualsAndHashCode
 public class Category extends BaseEntity{
+
+  @Column
 	private String name;
 
 	public Category() {
