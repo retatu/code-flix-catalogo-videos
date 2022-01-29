@@ -19,4 +19,10 @@ public class MySQLCategoryImplementation implements ICategoryRepository {
         return this.springDataCategoryRepository.findAll();
     }
 
+    @Override
+    public Category create(Category category) {
+        
+        return this.springDataCategoryRepository.save(category);
+    }
+
 }
